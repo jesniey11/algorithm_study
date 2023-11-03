@@ -10,17 +10,10 @@ int main()
 	len = str.length();
 	ans = 1;
 
-	if (len != 1)
+	
+	for (int i = 0; i < len / 2; i++)
 	{
-		for (int i = 0; i < len / 2; i++)
-		{
-			if (str[i] == str[len - (1 + i)]) { ans = 1; }
-			else 
-			{
-				ans = 0;
-				break;
-			}
-		}
+		if (str[i] != str[len - (1 + i)]) { ans = 0; break; }
 	}
 
 	cout << ans;
