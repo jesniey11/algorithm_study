@@ -6,14 +6,10 @@ int main()
 	n = 0; i = 1;
 	cin >> s;
 
-	while (true) 
-	{
-		if ((s - i) < 0) { break; }
-		if ((s - i) == 0) { n++; break; }
-
-		n++;
+	while (s >= i) {
 		s -= i;
 		i++;
+		n++;
 	}
 
 	cout << n;
