@@ -16,7 +16,7 @@ int main()
 	for (int i = 0; i < k; i++) { cin >> lan[i]; }
 	sort(lan.begin(), lan.end());
 
-	long long low, high, mid, sum;
+	long low, high, mid, sum;
 
 	low = 1;
 	high = lan[k - 1];
