@@ -1,32 +1,36 @@
 #include <iostream>
 #include <map>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
 int main() 
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(NULL);
-    
-	int n, m, input;
-	map<int, int> card;
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
+	int n, m, input;
 	cin >> n;
 
-	for (int i = 0; i < n; i++) 
-	{
-		cin >> input;
-		card.insert({ input, 1 });
-	}
+	vector<int> card(n);
+	
+	for (int i = 0; i < n; i++) { cin >> card[i]; }
+
+	sort(card.begin(), card.end());
 
 	cin >> m;
+	int low, high, mid;
+
+	low = 0;
+	high = m - 1;
 
 	for (int i = 0; i < m; i++) 
 	{
 		cin >> input;
-		if (card[input] == 1) { cout << 1; }
-		else { cout << 0; }
-		cout << " ";
+		if (binary_search(card.begin(), card.end(), input)) { cout << "1 "; }
+		else { cout << "0 "; }
 	}
 
 	return 0;
