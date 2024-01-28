@@ -1,7 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <map>
-#include <algorithm>
 
 using namespace std;
 
@@ -16,28 +14,31 @@ int main()
 {
 	fastio();
 
-	int n, m;
+	int n, m, p;
 	cin >> n >> m;
 
-	map<int, string> title;
-	vector<int> user(m);
+	vector<string> title(n);
+	vector<int> power(n);
 
-	string str;
-	int pow;
+	for (int i = 0; i < n; i++) { cin >> title[i] >> power[i]; }
 
-	for (int i = 0; i < n; i++) 
-	{
-		cin >> str >> pow;
-
-		if (!title[pow].empty()) { continue; }
-		title[pow] = str;
-	}
+	int low, high, mid;
 
 	for (int i = 0; i < m; i++) 
-	{ 
-		cin >> pow;
-		cout << (title.lower_bound(pow))->second << "\n";
+	{
+		low = 0;
+		high = n - 1;
+		cin >> p;
+		while (low <= high) 
+		{
+			mid = (low + high) / 2;
+			if (p <= power[mid]) { high = mid - 1; }
+			else { low = mid + 1; }
+		}
+
+		if (p > power[mid]) { mid += 1; }
+		cout << title[mid] << "\n";
 	}
-    
+
 	return 0;
 }
