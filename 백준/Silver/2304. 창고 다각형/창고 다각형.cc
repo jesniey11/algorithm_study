@@ -1,38 +1,38 @@
 #include <iostream>
-#include <algorithm>
+
 using namespace std;
-int N;
-int max_pos, max_h; // 최대 높이의 위치와 높이
-int arr[1001];
-int res = 0;
-int main(void)
+
+int main() 
 {
-	int L, H;
-	cin >> N;
-	for (int i = 0; i < N; i++)
+	int n, ans = 0, left = 0, right = 0;
+	int mh = 0, mi = 0;
+	int pillar[1001] = {};
+	cin >> n;
+	
+	for (int i = 0; i < n; i++) 
 	{
-		cin >> L >> H;
-		arr[L] = H;
-		if (max_h < H)
-		{
-			max_pos = L;
-			max_h = H;
-		}
+		int l, h;
+		cin >> l >> h;
+
+		pillar[l] = h;
+
+		if (mh < h) { mi = l; mh = max(mh, h); }
 	}
 
-	int Lh=0; // 왼쪽 영역의 최고 높이
-	for (int i = 1; i <max_pos; i++)
+	for (int i = 1; i < mi; i++)
 	{
-		Lh = max(Lh, arr[i]);
-		res += Lh;
+		left = max(left, pillar[i]);
+		ans += left;
 	}
 
-	int Rh=0; // 오른쪽 영역의 최고 높이
-	for (int i = 1000; i > max_pos; i--)
+	for (int i = 1000; i > mi; i--)
 	{
-		Rh = max(Rh, arr[i]);
-		res += Rh;
+		right = max(right, pillar[i]);
+		ans += right;
 	}
 
-	cout << res + max_h;
+	ans += mh;
+	cout << ans;
+
+	return 0;
 }
