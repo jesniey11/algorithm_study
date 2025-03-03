@@ -16,24 +16,24 @@ int main()
     for(int i=1; i<n; i++)
     {
         cin >> arr[i];
-        //cout << "i: " << i << " arr[i]: " << arr[i] << "\n";
     }
 
     int start = 1, end = 1;
 
      while(start <= end && end < n)
     {
-        //cout << "cnt[" << arr[end] << "]: " << cnt[arr[end]] << "\n";
-
-        if(cnt[arr[end]] < k) 
+        if(cnt[arr[end]] >= k) 
         {
-            cnt[arr[end++]]++;
-            ans = max(ans,(end-start));
+            cnt[arr[start]]--;
+            start++;
         }
 
-        else if(cnt[arr[end]] == k)
+        else 
         {
-            cnt[arr[start++]]--;
+            cnt[arr[end]]++;
+            end++;
+            
+            ans = max(ans,(end-start));
         }
     }
 
