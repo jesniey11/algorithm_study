@@ -1,78 +1,107 @@
 #include <iostream>
-#include <set>
-#include <sstream>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
-char chalpha(char c) {
-    if (c >= 'a' && c <= 'z') return c - ('a' - 'A');
-    else return c + ('a' - 'A');
+void fastio()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
 }
 
 int main() {
-    set<char> set;
-    int N;
-    cin >> N;
+    
+    fastio();
+    
+    int n;
+    bool alpha[26] = {false};
+    
+    cin >> n;
     cin.ignore();
-    for (int i = 0; i < N; i++) {
-        bool flag = false;
-        int i1, i2;
-        string s;
-        getline(cin, s);
-
-        stringstream ss(s);
+    for (int i = 0; i < n; i++) 
+    {
+        //한 줄씩 입력 -> 출력 -> 다음 줄 입력 -> ...
+        //words = {Save, As, Other, Folder} 같은 식으로 나올 예정
         vector<string> words;
+        
+        string line;
+        getline(cin, line);
+
         string word;
-        // 스트림을 한 줄씩 읽어, 공백 단위로 분리한 뒤, 결과 배열에 저장
-        while (getline(ss, word, ' ')) {
+        stringstream ss(line);
+        
+        //spilt line to words
+        while (getline(ss, word, ' ')) 
+        {
             words.push_back(word);
         }
 
-        //일단 단어별로 앞글자 확인
-        for (int j = 0; j < words.size(); j++) {
-            if (set.find(words[j][0]) == set.end()) {
-                set.insert(words[j][0]);
-                set.insert(chalpha(words[j][0]));
-                i1 = j;
-                i2 = 0;
+        bool flag = false;
+        int idx_a = 0, idx_b = 0;
+
+        //단어별 첫글자
+        for (int j = 0; j < words.size(); j++) 
+        {
+            int alpha_index = (words[j][0] >= 'a') ? words[j][0] - 'a' : words[j][0] - 'A';
+            if(!alpha[alpha_index])
+            {
+                alpha[alpha_index] = true;
                 flag = true;
+                idx_a = j; 
+                idx_b = 0;
                 break;
             }
         }
-        //한글자한글자 확인
-        if (!flag) {
-            for (int j = 0; j < words.size(); j++) {
-                if (flag) break;
-                for (int k = 1; k < words[j].length(); k++) {
-                    if (set.find(words[j][k]) == set.end()) {
-                        set.insert(words[j][k]);
-                        set.insert(chalpha(words[j][k]));
-                        i1 = j;
-                        i2 = k;
+        
+        //전체 글자 확인
+        if(!flag) 
+        {
+            for (int j = 0; j < words.size(); j++) 
+            {
+                if(flag) break;
+
+                for (int k = 1; k < words[j].length(); k++) 
+                {
+                    int alpha_index = (words[j][k] >= 'a') ? words[j][k] - 'a' : words[j][k] - 'A';
+                    if(!alpha[alpha_index])
+                    {   
+                        alpha[alpha_index] = true;
                         flag = true;
+                        idx_a = j; 
+                        idx_b = k;
                         break;
                     }
                 }
             }
         }
-        if (!flag) {
-            for (int j = 0; j < words.size(); j++) {
+        
+        //어느 단축키도 설정하지 못함
+        if(!flag) 
+        {
+            for (int j = 0; j < words.size(); j++) 
+            {
                 cout << words[j] << " ";
             }
-            cout << '\n';
-        } else {
-            for (int j = 0; j < words.size(); j++) {
-                if (i1 == j) {
-                    for (int k = 0; k < words[j].length(); k++) {
-                        if (k == i2) {
-                            cout << "[" << words[j][k] << "]";
-                        } else cout << words[j][k];
+            cout << "\n";
+        } 
+        else 
+        {
+            for (int j = 0; j < words.size(); j++) 
+            {
+                if(idx_a == j) 
+                {
+                    for (int k = 0; k < words[j].length(); k++) 
+                    {
+                        if(idx_b == k) cout << '[' << words[j][k] << ']';
+                        else cout << words[j][k];     
                     }
                     cout << " ";
-                } else cout << words[j] << " ";
+                }
+                else cout << words[j] << " ";
             }
-            cout << '\n';
+            cout << "\n";
         }
     }
 }
