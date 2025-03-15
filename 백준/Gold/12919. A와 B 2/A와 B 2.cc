@@ -7,29 +7,6 @@ using namespace std;
 string S, T;
 bool flag = false;
 
-//시간초과
-void StoT(string str)
-{
-    if(str.size() == T.size()) 
-    {
-        if(str == T) 
-        {
-            flag = true;
-            cout << flag;
-        }
-        return;   
-    }
-
-    string strA = str+'A';
-    StoT(strA);
-
-    string strB = str+'B';
-    reverse(strB.begin(), strB.end());
-    StoT(strB);
-
-    return;
-}
-
 void TtoS(string str)
 {
     int len = str.size();
@@ -39,7 +16,7 @@ void TtoS(string str)
         if(str == S) flag = true;
         return;
     }
-    
+
     string strA = str;
     if(strA.back() == 'A')
     {
@@ -57,7 +34,6 @@ void TtoS(string str)
 
     return;
 }
-
 
 int main()
 {
