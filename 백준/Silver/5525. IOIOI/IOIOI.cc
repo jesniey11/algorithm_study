@@ -6,29 +6,26 @@ int main()
 {
     int N, M;
     string S;
-    int ans = 0;
-    string ioi = "I";
 
     cin >> N >> M >> S;
-    for(int i = 0 ; i < N; i++)
-    {
-        ioi.append("OI");
-    }
+    int ans = 0;
 
-    for(int i = 0; i < M-ioi.size()+1; i++)
-    {        
+    for(int i = 0; i < M; i++)
+    {   
+        int ioi = 0;     
         if(S.at(i) != 'I') continue;
-        bool flag = false;
-
-        for(int j = 1; j < ioi.size(); j++)
+        while(S[i+2] == 'I' && S[i+1] == 'O')
         {
-            if(S.at(i+j) != ioi.at(j)) 
-            {   
-                flag = true;
-                break;
+            ioi++;
+
+            if(ioi == N) 
+            {
+                ans++;
+                ioi--;
             }
-        }
-        if(!flag) ans++;
+            
+            i+=2;
+        }    
     }
 
     cout << ans;
