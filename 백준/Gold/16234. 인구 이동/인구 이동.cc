@@ -38,9 +38,9 @@ bool solve(int i, int j)
             {
                 q.push({nx, ny});
                 visit[nx][ny] = true;
+                unite.push_back({nx, ny});
 
                 sum += A[nx][ny];
-                unite.push_back({nx, ny});
             }
         }
     }
@@ -54,7 +54,6 @@ bool solve(int i, int j)
 int main()
 {
     cin >> N >> L >> R;
-    ans = 0;
 
     for(int i = 0; i < N; i++)
     {
@@ -78,8 +77,8 @@ int main()
             }
         }
 
-        if(flag) ans++;
-        else break;
+        if(!flag) break;
+        ans++;
     }
 
     cout << ans;
