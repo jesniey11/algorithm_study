@@ -25,11 +25,7 @@ int main()
             int cnt = 0;
             int size = min(in[i].size(), in[j].size());
 
-            for(int k = 0; k < size; k++)
-            {
-                if(in[i][k] == in[j][k]) cnt++;
-                else break;
-            }
+            while(cnt < size && in[i][cnt] == in[j][cnt]) cnt++;
 
             if(M < cnt) 
             {
