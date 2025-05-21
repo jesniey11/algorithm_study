@@ -15,19 +15,19 @@ int palindrome(int s, int e, int del)
 {
     while(s < e)
     {
-        if(str[s] != str[e]) 
-        {
-            if(del == 0) 
-            {
-                if(palindrome(s+1, e, 1) == 0 || palindrome(s, e-1, 1) == 0) return 1;
-                return 2;
-            }
-            else return 2;
-        }
-        else 
+        if(str[s] == str[e])
         {
             s++; e--;
-        } 
+            continue;
+        }
+
+        if(del == 0) 
+        {
+            if(palindrome(s+1, e, 1) == 0 || palindrome(s, e-1, 1) == 0) return 1;
+            return 2;
+        }
+        else return 2;
+
     }
 
     return 0;
