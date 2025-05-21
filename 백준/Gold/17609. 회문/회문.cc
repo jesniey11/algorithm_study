@@ -21,18 +21,13 @@ int palindrome(int s, int e, int del)
             continue;
         }
 
-        if(del == 0) 
-        {
-            if(palindrome(s+1, e, 1) == 0 || palindrome(s, e-1, 1) == 0) return 1;
-            return 2;
-        }
+        if(del == 0 
+            && (palindrome(s+1, e, 1) == 0 || palindrome(s, e-1, 1) == 0)) return 1;
         else return 2;
-
     }
 
     return 0;
 }
-
 
 int main()
 {
