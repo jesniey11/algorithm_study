@@ -11,11 +11,30 @@ void fastio()
     cout.tie(0);
 }
 
+int solve(vector<int> &pos, vector<int> &neg)
+{
+    sort(pos.begin(), pos.end(), greater<int>());
+    sort(neg.begin(), neg.end(), greater<int>());
+
+    int p = 0, n = 0, cnt = 0;
+    while(p < pos.size() && n < neg.size()) 
+    {
+        if(pos[p] < neg[n]) 
+        {
+            cnt++;
+            p++; n++;
+        }
+        else p++;
+    }
+
+    return cnt;
+}
+
 int main()
 {
     fastio();
 
-    int N, ans = 0;
+    int N;
     vector<int> pman, pwoman, nman, nwoman;
 
     cin >> N;
@@ -32,37 +51,7 @@ int main()
         if(w > 0) pwoman.push_back(w);
         if(w < 0) nwoman.push_back(-w);
     }
-
-    sort(pman.begin(), pman.end(), greater<int>());
-    sort(pwoman.begin(), pwoman.end(), greater<int>());
-    sort(nman.begin(), nman.end(), greater<int>());
-    sort(nwoman.begin(), nwoman.end(), greater<int>());
-
-    int m, w;
-    // pman x nwoman
-    m = 0, w = 0;
-    while(m < pman.size() && w < nwoman.size()) 
-    {
-        if(pman[m] < nwoman[w]) 
-        {
-            ans++;
-            m++; w++;
-        }
-        else m++;
-    }
-
-    // nman x pwoman
-    m = 0, w = 0;
-    while(m < nman.size() && w < pwoman.size()) 
-    {
-        if(pwoman[w] < nman[m])
-        {
-            ans++;
-            m++; w++;
-        }
-        else w++;
-    }    
-
-    cout << ans;
+    
+    cout << solve(pman, nwoman) + solve(pwoman, nman);
     return 0;
 }
