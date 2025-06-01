@@ -19,6 +19,8 @@ bool wdsc_casc(pair<int, int> &a, pair<int, int> &b)
 
 int main()
 {
+    fastio();       
+
     int N, M;
     vector<pair<int, int>> v; // {무게, 금액}
     cin >> N >> M;
