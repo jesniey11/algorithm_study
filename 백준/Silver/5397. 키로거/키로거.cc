@@ -3,8 +3,17 @@
 
 using namespace std;
 
+void fastio()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+}
+
 int main()
 {
+    fastio();
+    
     int T; cin >> T;
     while(T--)
     {
