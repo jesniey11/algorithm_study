@@ -1,7 +1,10 @@
 #include<iostream>
-#include<queue>
 
 using namespace std;
+
+int N, q[2000002];
+int s = 0, e = 0;
+string cmd;
 
 void fastio()
 {
@@ -13,42 +16,32 @@ void fastio()
 int main()
 {
     fastio();
-    int N; cin >> N;
 
-    string cmd;
-    queue<int> q;
+    cin >> N;
     for(int i = 0; i < N; i++)
     {
         cin >> cmd;
-        if(cmd == "push") 
-        {
-            int n; cin >> n;
-            q.push(n);
-        }
+        if(cmd == "push") cin >> q[e++]; 
         if(cmd == "pop") 
         {
-            if(q.empty()) cout << -1 << "\n";
-            else 
-            {
-                cout << q.front() << "\n";
-                q.pop();
-            }
+            if(s == e) cout << -1 << "\n";
+            else cout << q[s++] << "\n";
         }
-        if(cmd == "size") cout << q.size() << "\n";
+        if(cmd == "size") cout << e-s << "\n";
         if(cmd == "empty") 
         {
-            if(q.empty()) cout << 1 << "\n";
+            if(s == e) cout << 1 << "\n";
             else cout << 0 << "\n";
         }
         if(cmd == "front") 
         {
-            if(q.empty()) cout << -1 << "\n";
-            else cout << q.front() << "\n";
+            if(s == e) cout << -1 << "\n";
+            else cout << q[s] << "\n";
         }
         if(cmd == "back") 
         {
-            if(q.empty()) cout << -1 << "\n";
-            else cout << q.back() << "\n";
+            if(s == e) cout << -1 << "\n";
+            else cout << q[e-1] << "\n";
         }
     }
 
