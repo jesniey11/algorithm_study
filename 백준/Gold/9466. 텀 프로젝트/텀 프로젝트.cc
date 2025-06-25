@@ -16,7 +16,7 @@ void fastio()
 
 void init()
 {
-    memset(visit, 0, sizeof(visit));
+    memset(visit + 1, 0, n * sizeof(int));
     cnt = 0;
 }
 
