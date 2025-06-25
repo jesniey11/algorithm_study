@@ -28,12 +28,7 @@ void DFS(int x)
     if(visit[next] == 0) DFS(next);
     else if(visit[next] == 1)
     {
-        int a = next;
-        while(a != x)
-        {
-            cnt++;
-            a = arr[a];
-        }
+        for(int i = next; i != x; i = arr[i]) cnt++;
         cnt++;
     }
     visit[x] = 2;
@@ -46,11 +41,10 @@ int main()
     cin >> T;
     while(T--)
     {
-        init();
-
         cin >> n;
         for(int i = 1; i <= n; i++) cin >> arr[i];
 
+        init();
         for(int i = 1; i <= n; i++) 
         {
             if(visit[i] == 0) DFS(i);
