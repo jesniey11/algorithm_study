@@ -58,10 +58,7 @@ void bridge()
             if(arr[ny][nx] == arr[p.first][p.second]) continue;
 
             // 다른섬
-            if(arr[ny][nx] != 0) 
-            {
-                ans = min(ans, bvist[ny][nx] + bvist[p.first][p.second]);
-            }
+            if(arr[ny][nx] != 0) ans = min(ans, bvist[ny][nx] + bvist[p.first][p.second]);
             
             // 바다
             else 
