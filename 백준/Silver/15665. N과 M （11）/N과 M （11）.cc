@@ -6,6 +6,13 @@ using namespace std;
 int N, M;
 int arr[9], ans[9];
 
+void fastio()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+}
+
 void solve(int n)
 {
     if(n == M) 
@@ -28,6 +35,8 @@ void solve(int n)
 
 int main()
 {
+    fastio();
+
     cin >> N >> M;
     for(int i = 0; i < N; i++) cin >> arr[i];
 
