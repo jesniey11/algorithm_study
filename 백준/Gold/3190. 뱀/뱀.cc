@@ -51,7 +51,6 @@ int solve()
     {
         if(t[idx] == cnt) 
         {
-            //cout << "회전한다" << "\n";
             dir = rotate(c[idx]);
             idx++;
         }
@@ -60,19 +59,14 @@ int solve()
         pair<int, int> tail = snake.back();
 
         int nx = head.first, ny = head.second;
-        //cout << "현재머리 " << nx << " " << ny << " " << dir << "\n";
-
+       
         if(dir == 0) nx--;
         if(dir == 1) nx++;
         if(dir == 2) ny--;
         if(dir == 3) ny++;
 
         cnt++; 
-        if(nx <= 0 || ny <= 0 || N < nx || N < ny || mark[nx][ny])
-        {
-            //cout << "벽에박아서 탈출\n"; 
-            return cnt;
-        }
+        if(nx <= 0 || ny <= 0 || N < nx || N < ny || mark[nx][ny]) return cnt;
 
         if(apple[nx][ny] != 1) 
         {
