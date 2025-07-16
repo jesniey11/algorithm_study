@@ -56,40 +56,33 @@ int solve()
             idx++;
         }
 
-        pair<int, int> head = snake.back();
-        pair<int, int> tail = snake.front();
+        pair<int, int> head = snake.front();
+        pair<int, int> tail = snake.back();
 
         int nx = head.first, ny = head.second;
+        //cout << "현재머리 " << nx << " " << ny << " " << dir << "\n";
 
         if(dir == 0) nx--;
-        else if(dir == 1) nx++;
-        else if(dir == 2) ny--;
-        else if(dir == 3) ny++;
+        if(dir == 1) nx++;
+        if(dir == 2) ny--;
+        if(dir == 3) ny++;
 
-        cnt++;
-
-        if(nx <= 0 || ny <= 0 || nx > N || ny > N || mark[nx][ny]) 
+        cnt++; 
+        if(nx <= 0 || ny <= 0 || N < nx || N < ny || mark[nx][ny])
+        {
+            //cout << "벽에박아서 탈출\n"; 
             return cnt;
+        }
 
         if(apple[nx][ny] != 1) 
         {
-            snake.pop_front();
+            snake.pop_back();
             mark[tail.first][tail.second] = false;
         }
-        else
-        {
-            apple[nx][ny] = 0;
-        }
+        else apple[nx][ny] = 0;
 
-        snake.push_back({nx, ny});
+        snake.push_front({nx, ny});
         mark[nx][ny] = true;
-
-        if(idx < L && t[idx] == cnt)
-        {
-            dir = rotate(c[idx]);
-            idx++;
-        }
-
     }
 
     return cnt;
