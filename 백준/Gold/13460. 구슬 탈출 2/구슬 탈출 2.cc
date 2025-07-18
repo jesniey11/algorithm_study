@@ -20,18 +20,6 @@ void fastin()
     cin.tie(0);
 }
 
-bool move(int &x, int &y, int d) 
-{
-    while(true) {
-        int nx = x + dx[d];
-        int ny = y + dy[d];
-        if(board[nx][ny] == '#') break;      // 벽 만나면 멈춤
-        x = nx; y = ny;
-        if(board[x][y] == 'O') return true;  // 구멍 빠짐
-    }
-    return false;
-}
-
 int BFS()
 {
     queue<tuple<int, int, int, int>> q;
@@ -51,7 +39,6 @@ int BFS()
             int nrx = rx, nry = ry;
             int nbx = bx, nby = by;
             
-            /*
             while(board[nbx+dx[d]][nby+dy[d]] == '.')
             {
                 nbx += dx[d], nby += dy[d];
@@ -63,13 +50,6 @@ int BFS()
                 nrx += dx[d], nry += dy[d];
             }
             if(board[nrx+dx[d]][nry+dy[d]] == 'O') return cnt + 1;
-            */
-
-            bool blue_hole = move(nbx, nby, d);
-            if(blue_hole) continue;  // 파란 구슬 빠지면 무시
-
-            bool red_hole = move(nrx, nry, d);
-            if(red_hole) return cnt + 1;  // 빨간 구슬 빠지면 성공 반환
 
             // 구슬 겹침 처리
             if(nrx == nbx && nry == nby) 
