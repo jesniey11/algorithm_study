@@ -28,8 +28,8 @@ int main()
         {
             if(arr[i] > arr[j]) dp[i] = max(dp[i], arr[i]+dp[j]);
         }
+        ans = max(ans, dp[i]);
     }
-    for(int i = 0; i < N; i++) ans = max(ans, dp[i]);
 
     cout << ans;
     return 0;
